@@ -6,28 +6,33 @@
 //  Copyright (c) 2015年 zyc. All rights reserved.
 //
 
-#import "OKDownloadViewController.h"
-#import "OKDownloadManager.h"
+#import "OKDownloadedViewController.h"
 #import "OKDownloadCell.h"
 #import "OKDownloadTask.h"
 
-@interface OKDownloadViewController ()<UITableViewDataSource,UITableViewDelegate>
+@interface OKDownloadedViewController ()<UITableViewDataSource,UITableViewDelegate>
 
 @end
 
-@implementation OKDownloadViewController
+@implementation OKDownloadedViewController
 {
     UITableView * _tableView;
-    OKDownloadManager * _manager;
-    
+    NSArray * _downloadedArray;
 }
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    _manager =[OKDownloadManager manager];
     [self createTableView];
     
+    NSFileManager * fm =[NSFileManager defaultManager];
     
+    if ([fm fileExistsAtPath:DOWNLOADED_FILE_PATH]) {
+        _downloadedArray=[NSArray arrayWithContentsOfFile:DOWNLOADED_FILE_PATH];
+    }
+    else
+    {
+        _downloadedArray=[[NSArray alloc] init];
+    }
     
 }
 
@@ -55,23 +60,20 @@
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return _manager.downLoadList.count;
+    return _downloadedArray.count;
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     OKDownloadCell * cell =[tableView dequeueReusableCellWithIdentifier:@"OKDownloadCell"];
-    
-    OKDownloadTask * task =_manager.downLoadList[indexPath.row];
-    
-    OKEveryDayModel * model = [task model];
-    
-    cell.bgImageUrl=model.coverForDetail;
-    cell.title=model.title;
-    cell.progress=task.progress;
+  
     
     
-    [task addObserver:self forKeyPath:@"progress" options:NSKeyValueObservingOptionNew context:nil];
+    cell.bgImageUrl= _downloadedArray[indexPath.row][@"coverForDetail"];
+    cell.title=_downloadedArray[indexPath.row][@"title"];
+    cell.progress=1;
+    
+    
     
     return cell;
 }
@@ -83,29 +85,19 @@
 
 
 
--(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
-{
 
-    OKDownloadTask * task =(OKDownloadTask *)object;
-    NSLog(@"%lf",task.progress);
-    OKDownloadCell * cell =(OKDownloadCell *)[_tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:_manager.downloadNum inSection:0]];
-    cell.progress=task.progress;
-    
-}
 
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    [_manager selectWithIndex:indexPath.row];
-   
+ 
+    
 }
 
 
 -(void)dealloc
 {
-    for (OKDownloadTask * task in _manager.downLoadList) {
-        [task removeObserver:self forKeyPath:@"progress" context:nil];
-    }
+ 
 }
 
 

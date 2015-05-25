@@ -8,7 +8,7 @@
 
 #import "OKDownloadTask.h"
 #import "AFNetworking.h"
-
+#import "OKDownloadManager.h"
 @implementation OKDownloadTask
 {
     AFHTTPRequestOperation * _operation;
@@ -30,7 +30,8 @@
     downloadPath = [downloadPath stringByAppendingPathComponent:[NSString stringWithFormat:@"Library/%@.mp4",model.id]];
     NSLog(@"%@",downloadPath);
     
-    _operation.outputStream=[NSOutputStream outputStreamToFileAtPath:downloadPath append:YES];
+    _operation.outputStream=[NSOutputStream outputStreamToFileAtPath:downloadPath append:NO];
+    
     
     __weak typeof(self) weakSelf =self;
     
@@ -42,13 +43,18 @@
         weakSelf.progress=(double)totalBytesRead/totalBytesExpectedToRead;
         
         
-//        NSLog(@"%@/%@",weakSelf.downloadBytes,weakSelf.totalBytes);
+        NSLog(@"%@/%@",weakSelf.downloadBytes,weakSelf.totalBytes);
         
     }];
     
     [_operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
         weakSelf.complete=YES;
         weakSelf.downloading=NO;
+        
+        OKDownloadManager * manager= [OKDownloadManager manager];
+        [manager endDownloadWithTask:weakSelf];
+        
+        
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         weakSelf.complete=NO;

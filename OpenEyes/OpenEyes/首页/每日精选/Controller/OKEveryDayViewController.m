@@ -47,7 +47,7 @@
     
 //    NSLog(@"%@", [NSDate dayStringWithDate:[NSDate date]]);
     
-    [self customNavigationBar];
+//    [self customNavigationBar];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -59,7 +59,14 @@
 -(void)customNavigationBar
 {
     UIButton * leftButton =[[UIButton alloc] initWithFrame:CGRectMake(0, 0, 30, 30)];
+    
+    
     [leftButton addTarget:self action:@selector(leftOnClick) forControlEvents:UIControlEventTouchUpInside];
+    [leftButton setTitle:@"下载" forState:UIControlStateNormal];
+    
+    [leftButton setTitleColor:[UIColor blackColor]forState:UIControlStateNormal];
+//    [leftButton setTitleColor:[UIColor blackColor]];
+    
     UIBarButtonItem * leftBarButton=[[UIBarButtonItem alloc] initWithCustomView:leftButton];
     self.navigationItem.leftBarButtonItem=leftBarButton;
 }

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>2DA33E20-14B1-4C1E-89BA-95A7A1846EA3</string>
+	<key>IDESourceControlProjectName</key>
+	<string>OpenEyes</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>67A520BD1E4F614E42645DFB5D21659C5984201C</key>
+		<string>https://github.com/OneKnife/OKOpenEyes.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>OpenEyes/OpenEyes.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>67A520BD1E4F614E42645DFB5D21659C5984201C</key>
+		<string>../../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/OneKnife/OKOpenEyes.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>67A520BD1E4F614E42645DFB5D21659C5984201C</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>67A520BD1E4F614E42645DFB5D21659C5984201C</string>
+			<key>IDESourceControlWCCName</key>
+			<string>OKOpenEyes</string>
+		</dict>
+	</array>
+</dict>
+</plist>

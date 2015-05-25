@@ -17,5 +17,9 @@
 
 #import "NSString+MD5Addition.h"
 
+#define DOWNLOAD_FILE_PATH [NSString stringWithFormat:@"%@/Library/downingList.data",NSHomeDirectory()]
+
+#define DOWNLOADED_FILE_PATH [NSString stringWithFormat:@"%@/Library/downloadedList.data",NSHomeDirectory()]
+
 
 #endif

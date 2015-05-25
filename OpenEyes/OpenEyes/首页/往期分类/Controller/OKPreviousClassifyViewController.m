@@ -11,6 +11,7 @@
 #import "AFNetworking.h"
 #import "OKPreviousClassfyModel.h"
 #import "UIImageView+WebCache.h"
+#import "OKPreviousClassDetailViewController.h"
 
 #define CATEGORY_URL @"http://baobab.wandoujia.com/api/v1/categories"
 
@@ -99,7 +100,17 @@
     UIImageView * imgView =[[UIImageView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH/2-1, SCREEN_WIDTH/2-2)];
     [imgView sd_setImageWithURL:[NSURL URLWithString:[_dataArray[indexPath.row]bgPicture]]];
     
+    UILabel * label =[[UILabel alloc] initWithFrame:CGRectMake(0, imgView.frame.size.height/2-10, SCREEN_WIDTH/2-2, 20)];
+    label.font=[UIFont boldSystemFontOfSize:16];
+    label.text=[NSString stringWithFormat:@"#%@",[_dataArray[indexPath.row] name]];
+    label.textAlignment=NSTextAlignmentCenter;
+    label.textColor=[UIColor whiteColor];
+    
     [cell.contentView addSubview:imgView];
+    [cell.contentView addSubview:label];
+    
+//    cell.contentView addObserver:<#(NSObject *)#> forKeyPath:<#(NSString *)#> options:<#(NSKeyValueObservingOptions)#> context:<#(void *)#>
+    
     
     return cell;
     
@@ -123,6 +134,15 @@
 -(CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section
 {
     return 1;
+}
+
+-(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    OKPreviousClassDetailViewController * deilVC =[[OKPreviousClassDetailViewController alloc] init];
+    deilVC.categoryName=[_dataArray[indexPath.row]name];
+    deilVC.title=[NSString stringWithFormat:@"#%@",deilVC.categoryName];
+    
+    [self.navigationController pushViewController:deilVC animated:YES];
 }
 
 
